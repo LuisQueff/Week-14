@@ -1,12 +1,7 @@
 import Page from "./page";
 
-/**
- * sub page containing specific selectors and methods for a specific page
- */
 class Checkout1Page extends Page {
-  /**
-   * define selectors using getter methods
-   */
+
   get firstName() {
     return $("#first-name");
   }
@@ -27,10 +22,14 @@ class Checkout1Page extends Page {
     return $("#continue");
   }
 
-  /**
-   * a method to encapsule automation code to interact with the page
-   * e.g. to login using username and password
-   */
+  get error() {
+    return $("#checkout_info_container > div > form > div.checkout_info > div.error-message-container.error");
+  }
+
+  get errorMsg() {
+    return $("#checkout_info_container > div > form > div.checkout_info > div.error-message-container.error > h3")
+  }
+
   async checkout(firstName, lastName, postalCode) {
     await this.firstName.setValue(firstName);
     await this.lastName.setValue(lastName);
@@ -38,9 +37,6 @@ class Checkout1Page extends Page {
     await this.btnContinue.click();
   }
 
-  /**
-   * overwrite specific options to adapt it to page object
-   */
   open() {
     return super.open("checkout-step-one");
   }

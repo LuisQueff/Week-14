@@ -5,7 +5,7 @@ import Page from './page';
 /**
  * sub page containing specific selectors and methods for a specific page
  */
-class Checkout extends Page {
+class Checkout1Page extends Page {
     /**
      * define selectors using getter methods
      */
@@ -14,7 +14,7 @@ class Checkout extends Page {
     }
 
     get lastName () {
-        return $('#lastName');
+        return $('#last-name');
     }
 
     get postalCode () {
@@ -29,6 +29,17 @@ class Checkout extends Page {
         return $('#continue');
     }
 
+        /**
+     * a method to encapsule automation code to interact with the page
+     * e.g. to login using username and password
+     */
+         async checkout (firstName, lastName, postalCode) {
+            await this.firstName.setValue(firstName);
+            await this.lastName.setValue(lastName);
+            await this.postalCode.setValue(postalCode);
+            await this.btnContinue.click();
+        }
+
     /**
      * overwrite specific options to adapt it to page object
      */
@@ -37,4 +48,4 @@ class Checkout extends Page {
     }
 }
 
-export default new Checkout();
+export default new Checkout1Page();

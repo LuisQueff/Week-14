@@ -1,7 +1,7 @@
-# TG-W14
+# Week 14
 
 Automated tests for the page https://www.saucedemo.com/.
-Positive and negative cases are evaluated using WebdriverIO and Jasmine.
+Positive and negative cases are evaluated using WebdriverIO and Jasmine as framework.
 
 ## How to open
 

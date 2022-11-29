@@ -309,13 +309,12 @@ describe("Validate the elements", () => {
     for (let i = 0; i < length; i++) {
       arrAZ.push(await list.$$('.inventory_item')[i].$('.inventory_item_name').getText());
     };
-    console.log(arrAZ.reverse());
     await InventoryPage.sortZA();
     let arrZA = [];
     for (let i = 0; i < length; i++) {
       arrZA.push(await list.$$('.inventory_item')[i].$('.inventory_item_name').getText());
     };
-    await expect(arrAZ.reverse()) === (arrZA);
+    await expect(arrAZ.reverse().toString()).toEqual(arrZA.toString());
     await InventoryPage.logout();
     await browser.refresh();
   });
@@ -329,13 +328,15 @@ describe("Validate the elements", () => {
     for (let i = 0; i < length; i++) {
       arrLH.push(await list.$$('.inventory_item')[i].$('.inventory_item_price').getText());
     };
-    console.log(arrLH.reverse());
+    await InventoryPage.logout();
+    await browser.refresh();
+    await LoginPage.login('standard_user', 'secret_sauce');
     await InventoryPage.sortHL();
     let arrHL = [];
     for (let i = 0; i < length; i++) {
       arrHL.push(await list.$$('.inventory_item')[i].$('.inventory_item_price').getText());
     };
-    await expect(arrLH.reverse()) === (arrHL);
+    await expect(arrLH.reverse().toString()).toEqual(arrHL.toString());
     await InventoryPage.logout();
     await browser.refresh();
   });

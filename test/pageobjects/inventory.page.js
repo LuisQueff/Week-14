@@ -82,11 +82,11 @@ class InventoryPage extends Page {
   }
 
   get btnProduct6() {
-    return $("#add-to-cart-test\.allthethings\(\)-t-shirt-\(red\)");
+    return $('button[name="add-to-cart-test.allthethings()-t-shirt-(red)"]');
   }
 
   get btnRProduct6() {
-    return $("#remove-test\.allthethings\(\)-t-shirt-\(red\)");
+    return $('button[name="remove-test.allthethings()-t-shirt-(red)"]');
   }
 
   get imgProduct6() {
@@ -105,6 +105,22 @@ class InventoryPage extends Page {
     return $("#continue-shopping")
   }
 
+  get sort() {
+    return $("#header_container > div.header_secondary_container > div.right_component > span > select")
+  }
+
+  get zA() {
+    return $("#header_container > div.header_secondary_container > div.right_component > span > select > option:nth-child(2)")
+  }
+
+  get lowHigh() {
+    return $("#header_container > div.header_secondary_container > div.right_component > span > select > option:nth-child(3)")
+  }
+
+  get highLow() {
+    return $("#header_container > div.header_secondary_container > div.right_component > span > select > option:nth-child(4)")
+  }
+
   async clearPurchase() {
     await this.hamburguer.click();
     await this.hamburguer.pause(1500);
@@ -116,6 +132,24 @@ class InventoryPage extends Page {
     await this.hamburguer.click();
     await this.hamburguer.pause(1500);
     await this.logoutSidebar.click();
+  }
+
+  async sortZA() {
+    await this.sort.click();
+    await this.sort.pause(1000);
+    await this.zA.click();
+  }
+
+  async sortLH() {
+    await this.sort.click();
+    await this.sort.pause(1000);
+    await this.lowHigh.click();
+  }
+
+  async sortHL() {
+    await this.sort.click();
+    await this.sort.pause(1000);
+    await this.highLow.click();
   }
 
   open() {

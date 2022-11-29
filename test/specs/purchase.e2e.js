@@ -247,14 +247,25 @@ describe("Validate the elements", () => {
     await InventoryPage.logout();
     await browser.refresh();
   });
+
   it("All the purchase butons must have the correct text when it clicked", async () => {
     await LoginPage.login("standard_user", "secret_sauce");
     await expect(InventoryPage.btnAllProduct).toHaveTextContaining(
       "ADD TO CART"
     );
-    await InventoryPage.btnAllProduct.click();
+    await InventoryPage.btnProduct1.click();
+    await InventoryPage.btnProduct2.click();
+    await InventoryPage.btnProduct3.click();
+    await InventoryPage.btnProduct4.click();
+    await InventoryPage.btnProduct5.click();
+    await InventoryPage.btnProduct6.click();
     await expect(InventoryPage.btnAllProduct).toHaveTextContaining("REMOVE");
-    await InventoryPage.btnAllProduct.click();
+    await InventoryPage.btnRProduct1.click();
+    await InventoryPage.btnRProduct2.click();
+    await InventoryPage.btnRProduct3.click();
+    await InventoryPage.btnRProduct4.click();
+    await InventoryPage.btnRProduct5.click();
+    await InventoryPage.btnRProduct6.click();
     await expect(InventoryPage.btnAllProduct).toHaveTextContaining(
       "ADD TO CART"
     );
@@ -269,7 +280,7 @@ describe("Validate the elements", () => {
     await InventoryPage.btnProduct3.click();
     await InventoryPage.btnProduct4.click();
     await InventoryPage.btnProduct5.click();
-    // await InventoryPage.btnProduct6.click();
+    await InventoryPage.btnProduct6.click();
     await expect(InventoryPage.btnAllProduct).toHaveTextContaining("REMOVE");
     await InventoryPage.btnCart.click();
     await InventoryPage.btnRProduct1.click();
@@ -277,7 +288,7 @@ describe("Validate the elements", () => {
     await InventoryPage.btnRProduct3.click();
     await InventoryPage.btnRProduct4.click();
     await InventoryPage.btnRProduct5.click();
-    // await InventoryPage.btnRProduct6.click();
+    await InventoryPage.btnRProduct6.click();
     await InventoryPage.btnCShopping.click();
     await expect(browser).toHaveUrl("https://www.saucedemo.com/inventory.html");
     await expect(InventoryPage.btnAllProduct).toHaveTextContaining(
@@ -287,6 +298,45 @@ describe("Validate the elements", () => {
     await InventoryPage.aboutSidebar.click();
     await expect(browser).toHaveUrl("https://saucelabs.com/");
     await browser.url("https://www.saucedemo.com/");
+    await browser.refresh();
+  });
+
+  it("Validate the sort A-Z and Z-A", async () => {
+    await LoginPage.login('standard_user', 'secret_sauce');
+    const list = await $('.inventory_list');
+    const length = await list.$$('.inventory_item').length;
+    let arrAZ = [];
+    for (let i = 0; i < length; i++) {
+      arrAZ.push(await list.$$('.inventory_item')[i].$('.inventory_item_name').getText());
+    };
+    console.log(arrAZ.reverse());
+    await InventoryPage.sortZA();
+    let arrZA = [];
+    for (let i = 0; i < length; i++) {
+      arrZA.push(await list.$$('.inventory_item')[i].$('.inventory_item_name').getText());
+    };
+    await expect(arrAZ.reverse()) === (arrZA);
+    await InventoryPage.logout();
+    await browser.refresh();
+  });
+
+  it("Validate the sort low price and high price", async () => {
+    await LoginPage.login('standard_user', 'secret_sauce');
+    await InventoryPage.sortLH();
+    const list = await $('.inventory_list');
+    const length = await list.$$('.inventory_item').length;
+    let arrLH = [];
+    for (let i = 0; i < length; i++) {
+      arrLH.push(await list.$$('.inventory_item')[i].$('.inventory_item_price').getText());
+    };
+    console.log(arrLH.reverse());
+    await InventoryPage.sortHL();
+    let arrHL = [];
+    for (let i = 0; i < length; i++) {
+      arrHL.push(await list.$$('.inventory_item')[i].$('.inventory_item_price').getText());
+    };
+    await expect(arrLH.reverse()) === (arrHL);
+    await InventoryPage.logout();
     await browser.refresh();
   });
 });

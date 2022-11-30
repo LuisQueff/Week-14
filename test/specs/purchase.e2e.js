@@ -11,20 +11,6 @@ describe("Cases in which the purchase should not be made", () => {
     browser.url("https://www.saucedemo.com/");
   });
 
-  // it("You should not proceed with the purchase with an empty cart", async () => {
-  //   await LoginPage.login("standard_user", "secret_sauce");
-  //   await expect(browser).toHaveUrl("https://www.saucedemo.com/inventory.html");
-  //   await InventoryPage.btnCart.click();
-  //   await expect(browser).toHaveUrl("https://www.saucedemo.com/cart.html");
-  //   await CartPage.btnCheckout.click();
-  //   await expect(browser).toHaveUrl(
-  //     "https://www.saucedemo.com/cart.html"
-  //   );
-  //   await InventoryPage.clearPurchase();
-  //   await InventoryPage.logout();
-  //   await browser.refresh();
-  // });
-
   it("You should not proceed with the purchase without entering the customer information", async () => {
     await LoginPage.login("standard_user", "secret_sauce");
     await InventoryPage.btnProduct1.click();
@@ -118,41 +104,6 @@ describe("Cases in which the purchase should be made", () => {
     await browser.refresh();
   });
 
-  // it("Should be able to buy a product (problem user)", async () => {
-  //   await LoginPage.login("problem_user", "secret_sauce");
-  //   await expect(browser).toHaveUrl("https://www.saucedemo.com/inventory.html");
-  //   await InventoryPage.btnProduct1.click();
-  //   await InventoryPage.btnCart.click();
-  //   await expect(browser).toHaveUrl("https://www.saucedemo.com/cart.html");
-  //   await CartPage.btnCheckout.click();
-  //   await expect(browser).toHaveUrl(
-  //     "https://www.saucedemo.com/checkout-step-one.html"
-  //   );
-  //   await Checkout1Page.checkout("jose", "perez", "11000");
-  //   await expect(browser).toHaveUrl(
-  //     "https://www.saucedemo.com/checkout-step-two.html"
-  //   );
-  //   await Checkout2Page.btnFinish.click();
-  //   await expect(browser).toHaveUrl(
-  //     "https://www.saucedemo.com/checkout-complete.html"
-  //   );
-  //   await expect(CompletePage.header).toHaveText("CHECKOUT: COMPLETE!");
-  //   await expect(CompletePage.successText1).toHaveText(
-  //     "THANK YOU FOR YOUR ORDER"
-  //   );
-  //   await expect(CompletePage.successText2).toHaveText(
-  //     "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
-  //   );
-  //   await expect(CompletePage.imgPony).toHaveAttr(
-  //     "src",
-  //     "/static/media/pony-express.46394a5d.png"
-  //   );
-  //   await CompletePage.backBtn.click();
-  //   await expect(browser).toHaveUrl("https://www.saucedemo.com/inventory.html");
-  //   await InventoryPage.logout();
-  //   await expect(browser).toHaveUrl("https://www.saucedemo.com/");
-  //   await browser.refresh();
-  // });
 
   it("Should be able to buy a product (glitched user)", async () => {
     await LoginPage.login("performance_glitch_user", "secret_sauce");
@@ -225,17 +176,6 @@ describe("Validate the elements", () => {
     await InventoryPage.logout();
     await browser.refresh();
   });
-  // it("The images must correspond to the products (Problem user)", async () => {
-  //   await LoginPage.login("problem_user", "secret_sauce");
-  //   await expect(InventoryPage.imgProduct1).toHaveAttr("src", "/static/media/sauce-backpack-1200x1500.34e7aa42.jpg");
-  //   await expect(InventoryPage.imgProduct2).toHaveAttr("src", "/static/media/bike-light-1200x1500.a0c9caae.jpg");
-  //   await expect(InventoryPage.imgProduct3).toHaveAttr("src", "/static/media/bolt-shirt-1200x1500.c0dae290.jpg");
-  //   await expect(InventoryPage.imgProduct4).toHaveAttr("src", "/static/media/sauce-pullover-1200x1500.439fc934.jpg");
-  //   await expect(InventoryPage.imgProduct5).toHaveAttr("src", "/static/media/red-onesie-1200x1500.1b15e1fa.jpg");
-  //   await expect(InventoryPage.imgProduct6).toHaveAttr("src", "/static/media/red-tatt-1200x1500.e32b4ef9.jpg");
-  //   await InventoryPage.logout();
-  //  await browser.refresh();
-  // });
   it("The images must correspond to the products (Glitch user)", async () => {
     await LoginPage.login("performance_glitch_user", "secret_sauce");
     await expect(InventoryPage.imgProduct1).toHaveAttr("src", "/static/media/sauce-backpack-1200x1500.34e7aa42.jpg");
